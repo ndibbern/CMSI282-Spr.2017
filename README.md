@@ -4,7 +4,7 @@
 
 ### Learning Outcomes
 
-- This is the second in a two-course sequence about some of the fundamental data structures, algorithms, problems, and paradigms of computing.
+- This is the second, in a two-course sequence about some of the fundamental data structures, algorithms, problems, and paradigms of computing.
 
 - A major theme of this course is algorithm paradigms. A paradigm transcends any single problem and serves as a more general program model.
 
