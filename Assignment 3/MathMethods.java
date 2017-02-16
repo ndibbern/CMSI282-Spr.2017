@@ -3,6 +3,9 @@ import java.math.BigInteger;
 public class MathMethods {
 
     public static BigInteger factorial(long n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Factorials of negative numbers can not be computed");
+        }
         if (n <= 1) return BigInteger.ONE;
         BigInteger answer = BigInteger.valueOf(n).multiply(factorial(n-1));
         return answer;
@@ -25,6 +28,8 @@ public class MathMethods {
     }
 
     public static long gcd(long m, long n) {
+        m = Math.abs(m);
+        n = Math.abs(n);
         if (n == 0) return m;
         long answer = gcd(n, m % n);
         return answer;
@@ -130,12 +135,11 @@ public class MathMethods {
                     break;
                case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
                     break;
-               default: System.out.println("illegal argument");
+               default: System.out.println("Illegal argument");
                     break;
            }
        } else {
-           System.out.println("illegal argument");
+           System.out.println("Illegal argument");
        }
-
     }
 }
