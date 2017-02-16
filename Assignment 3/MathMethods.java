@@ -2,39 +2,38 @@ import java.math.BigInteger;
 
 public class MathMethods {
 
-    public static BigInteger factorial(long n) {
-        if (n <= 1) return BigInteger.ONE;
-        BigInteger answer = BigInteger.valueOf(n).multiply(factorial(n-1));
-        return answer;
+    public static BigInteger factorial (long n) {
+        if (n < 2) return BigInteger.ONE;
+        return BigInteger.valueOf(n).multiply(factorial(n-1));
     }
 
-    public static BigInteger fibonacci(int n) {
+    public static BigInteger fibonacci (int n) {
         if (n == 1) return BigInteger.ZERO;
-        if (n <= 3) return BigInteger.ONE;
+        if (n < 4) return BigInteger.ONE;
 
-        BigInteger n1 = BigInteger.ZERO;
-        BigInteger n2 = BigInteger.ONE;
+        BigInteger fib_1 = BigInteger.ZERO;
+        BigInteger fib_2 = BigInteger.ONE;
         BigInteger temp = new BigInteger("21");
 
-        for(int i = 3; i <= n ; i++) {
-            temp = n1.add(n2);
-            n1 = n2;
-            n2 = temp;
+        for (int i = 3; i <= n ; i++) {
+            temp = fib_1.add(fib_2);
+            fib_1 = fib_2;
+            fib_2 = temp;
         }
-        return n2;
+        return fib_2;
     }
 
-    public static long gcd(long m, long n) {
+    public static long gcd (long m, long n) {
+        if (n < 0) return -1; //illegal flag
         if (n == 0) return m;
-        long answer = gcd(n, m % n);
-        return answer;
+        return gcd(n, m % n);
     }
 
-    public static long lcm(long m, long n) {
+    public static long lcm (long m, long n) {
         return (m * n)/gcd(m, n);
     }
 
-    public static double poly(double x, double[] coeff) {
+    public static double poly (double x, double[] coeff) {
         double polEvaluated = 0;
         for(int i = coeff.length - 1; i > 0; i --) {
             polEvaluated = (polEvaluated + coeff[i]) * x;
@@ -43,7 +42,7 @@ public class MathMethods {
         return polEvaluated;
     }
 
-    public static double power(double x, int n) {
+    public static double power (double x, int n) {
         double res = 1;
 
         while (n > 0) {
@@ -56,7 +55,7 @@ public class MathMethods {
 
     }
 
-    public static double root(int n, double x, double epsilon) {
+    public static double root (int n, double x, double epsilon) {
 
         if (x < 0 && n % 2 != 0) {
             throw new IllegalArgumentException("Root is complex");
@@ -97,11 +96,11 @@ public class MathMethods {
         return isPositive ? avg : -avg;
     }
 
-    public static double sqrt(double x, double epsilon) {
+    public static double sqrt (double x, double epsilon) {
         return root(2, x, epsilon);
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
 
         if (args.length >= 2) {
             // args 0 -> name of method
