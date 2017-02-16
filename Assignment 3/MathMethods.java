@@ -28,7 +28,7 @@ public class MathMethods {
     public static long gcd (long m, long n) {
         m = Math.abs(m); n = Math.abs(n);
         if (n == 0) return m;
-        return gcd(n, m % n);
+        return gcd(n, m%n);
     }
 
     public static long lcm (long m, long n) {
@@ -49,7 +49,7 @@ public class MathMethods {
         if (n == 0) return 1;
         if (n == 1) return x;
         if (n % 2 == 0) return power(x*x, n/2);
-        else return power(x*x, (n-1)/2);
+        else return x * power(x*x, (n-1)/2);
 
     }
 
