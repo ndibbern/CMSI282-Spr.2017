@@ -12,6 +12,9 @@ public class MathMethods {
     }
 
     public static BigInteger fibonacci(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Fibonacci of negative numbers can not be computed");
+        }
         if (n == 1) return BigInteger.ZERO;
         if (n <= 3) return BigInteger.ONE;
 
@@ -50,7 +53,7 @@ public class MathMethods {
 
     public static double power(double x, int n) {
         if (n < 0) {
-            return power(1/x, -n);
+            return power(1/x, -n); // Compute inverse
         }
 
         double pow = 1;
@@ -108,6 +111,13 @@ public class MathMethods {
         return root(2, x, epsilon);
     }
 
+    public static String instructions () {
+        String instruction =  " # Instructions for program : \n";
+        instruction += "java MathMethods [function] [parameters]...";
+        return instruction;
+    }
+
+
     public static void main(String[] args) {
         if (args.length >= 2) {
             // args 0 -> name of method
@@ -135,11 +145,11 @@ public class MathMethods {
                     break;
                case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
                     break;
-               default: System.out.println("Illegal argument");
+               default: System.out.println(instructions());
                     break;
            }
        } else {
-           System.out.println("Illegal argument");
+           System.out.println(instructions());
        }
     }
 }
