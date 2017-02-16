@@ -11,6 +11,22 @@ public class MathMethods {
         return answer;
     }
 
+    public static BigInteger fibonacci(int n) {
+        if (n == 1) return BigInteger.ZERO;
+        if (n <= 3) return BigInteger.ONE;
+
+        BigInteger n1 = BigInteger.ZERO;
+        BigInteger n2 = BigInteger.ONE;
+        BigInteger temp = new BigInteger("21");
+
+        for(int i = 3; i <= n ; i++) {
+            temp = n1.add(n2);
+            n1 = n2;
+            n2 = temp;
+        }
+        return n2;
+    }
+
     public static long gcd(long m, long n) {
         if (n == 0) return m;
         long answer = gcd(n, m % n);
@@ -85,6 +101,7 @@ public class MathMethods {
         System.out.println(factorial(5));
         System.out.println(gcd(12, 8));
         System.out.println(root(2,9,0.000001));
+        System.out.println(fibonacci(7));
 
     }
 }
