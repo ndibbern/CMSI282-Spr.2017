@@ -4,6 +4,7 @@ import java.lang.Math;
 
 public class MathMethods {
 
+    ///public static String[] operations = {"factorial", "fibonacci", "gcd", "lcm", "poly", "power", "root", "sqrt"};
 
     public static BigInteger factorial(long n) {
         if (n <= 1) return BigInteger.ONE;
@@ -105,12 +106,40 @@ public class MathMethods {
     }
 
     public static void main(String[] args) {
-        // System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
-        // System.out.println(factorial(5));
-        // System.out.println(gcd(12, 8));
-        System.out.println(root(3,125,0.000001));
-        // System.out.println(fibonacci(7));
-        System.out.println(power(3,9));
+
+        if (args.length >= 2) {
+            // args 0 -> name of method
+            String operation = args[0];
+
+            // args 1... -> imput values
+            switch (operation) {
+               case "factorial":  System.out.println(factorial(Integer.parseInt(args[1])));
+                    break;
+               case "fibonacci":  System.out.println(fibonacci(Integer.parseInt(args[1])));
+                    break;
+               case "gcd":  System.out.println(gcd(Long.parseLong(args[1]), Long.parseLong(args[2])));
+                    break;
+               case "lcm":  System.out.println(lcm(Long.parseLong(args[1]), Long.parseLong(args[2])));
+                    break;
+               case "poly":
+                    double[] coeff = new double[args.length - 1];
+                    for (int i = 1; i < args.length; i ++) {
+                        coeff[i-1] = Double.parseDouble(args[i]);
+                    }
+                    System.out.println(poly(Double.parseDouble(args[1]), coeff));
+                    break;
+               case "power":  System.out.println(power(Double.parseDouble(args[1]), Integer.parseInt(args[2])));
+                    break;
+               case "root":  System.out.println(root(Integer.parseInt(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
+                    break;
+               case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
+                    break;
+               default: System.out.println("illigal argument");
+                    break;
+           }
+       } else {
+           System.out.println("illigal argument");
+       }
 
     }
 }
