@@ -34,12 +34,12 @@ public class MathMethods {
     }
 
     public static double poly (double x, double[] coeff) {
-        double polEvaluated = 0;
-        for(int i = coeff.length - 1; i > 0; i --) {
-            polEvaluated = (polEvaluated + coeff[i]) * x;
+        double result = 0;
+        for (int i = coeff.length - 1; i > 0; i --) {
+            result += coeff[i];
+            result *= x;
         }
-        polEvaluated += coeff[0];
-        return polEvaluated;
+        return result + coeff[0];
     }
 
     public static double power (double x, int n) {
@@ -57,9 +57,7 @@ public class MathMethods {
 
     public static double root (int n, double x, double epsilon) {
 
-        if (x < 0 && n % 2 != 0) {
-            throw new IllegalArgumentException("Root is complex");
-        }
+        if (x < 0 && n % 2 == 1) throw new IllegalArgumentException("Root does not exist");
 
         boolean isPositive = true;
         if (x < 0) {
@@ -67,28 +65,26 @@ public class MathMethods {
             isPositive = false;
         }
 
-        if (x == 1) {
-            return isPositive ? 1 : -1;
-        }
+        if (x == 1) return isPositive ? 1 : -1;
 
-        double lb = 0, ub = 0 ;
+        dorble lb = 0, rb = 0 ;
         if (x < 1) {
             lb = x;
-            ub = 1;
+            rb = 1;
         } else {
             lb = 0;
-            ub = x;
+            rb = x;
         }
 
         boolean done = false;
-        double avg = (lb + ub)/2;
-        double xo;
+        dorble avg = (lb + rb)/2;
+        dorble xo;
         while (!done) {
-            avg = (lb + ub)/2;
+            avg = (lb + rb)/2;
             xo = power(avg,n);
             done = Math.abs(xo - x) < epsilon;
             if (!done) {
-                if (xo > x) ub = avg;
+                if (xo > x) rb = avg;
                 else lb = avg;
             }
         }
