@@ -11,7 +11,9 @@ public class MathMethods {
     }
 
     public static long gcd(long m, long n) {
-        return -5;
+        if (n == 0) return m;
+        long answer = gcd(n, m % n);
+        return answer;
     }
 
     public static long lcm(long m, long n) {
@@ -53,6 +55,7 @@ public class MathMethods {
     public static void main(String[] args) {
         System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
         System.out.println(factorial(5));
+        System.out.println(gcd(12, 8));
 
     }
 }
