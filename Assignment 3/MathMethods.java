@@ -14,9 +14,9 @@ public class MathMethods {
 
         BigInteger n1 = BigInteger.ZERO;
         BigInteger n2 = BigInteger.ONE;
-        BigInteger temp = new BigInteger("21");
+        BigInteger temp = new BigInteger("21"); // Place holder
 
-        for(int i = 3; i <= n ; i++) {
+        for (int i = 3; i <= n ; i++) {
             temp = n1.add(n2);
             n1 = n2;
             n2 = temp;
@@ -36,7 +36,7 @@ public class MathMethods {
 
     public static double poly(double x, double[] coeff) {
         double polEvaluated = 0;
-        for(int i = coeff.length - 1; i > 0; i --) {
+        for (int i = coeff.length - 1; i > 0; i --) {
             polEvaluated = (polEvaluated + coeff[i]) * x;
         }
         polEvaluated += coeff[0];
@@ -44,20 +44,22 @@ public class MathMethods {
     }
 
     public static double power(double x, int n) {
-        double res = 1;
+        if (n < 0) {
+            return power(1/x, -n);
+        }
 
+        double pow = 1;
         while (n > 0) {
-            if (n % 2 == 1) res = res*x;
-
+            if (n % 2 == 1) {
+                pow = pow * x;
+            }
             n /= 2;
             x *= x;
         }
-        return res;
-
+        return pow;
     }
 
     public static double root(int n, double x, double epsilon) {
-
         if (x < 0 && n % 2 != 0) {
             throw new IllegalArgumentException("Root is complex");
         }
@@ -102,11 +104,9 @@ public class MathMethods {
     }
 
     public static void main(String[] args) {
-
         if (args.length >= 2) {
             // args 0 -> name of method
             String operation = args[0];
-
             // args 1... -> imput values
             switch (operation) {
                case "factorial":  System.out.println(factorial(Integer.parseInt(args[1])));
