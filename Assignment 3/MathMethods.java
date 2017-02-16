@@ -122,9 +122,9 @@ public class MathMethods {
                case "lcm":  System.out.println(lcm(Long.parseLong(args[1]), Long.parseLong(args[2])));
                     break;
                case "poly":
-                    double[] coeff = new double[args.length - 1];
-                    for (int i = 1; i < args.length; i ++) {
-                        coeff[i-1] = Double.parseDouble(args[i]);
+                    double[] coeff = new double[args.length - 2];
+                    for (int i = 2; i < args.length; i ++) {
+                        coeff[i-2] = Double.parseDouble(args[i]);
                     }
                     System.out.println(poly(Double.parseDouble(args[1]), coeff));
                     break;
