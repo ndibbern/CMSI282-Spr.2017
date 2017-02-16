@@ -27,12 +27,12 @@ public class MathMethods {
     }
 
     public static double poly(double x, double[] coeff) {
-        double pol_evaluated = 0;
+        double polEvaluated = 0;
         for(int i = coeff.length - 1; i > 0; i --) {
-            pol_evaluated = (pol_evaluated + coeff[i]) * x;
+            polEvaluated = (polEvaluated + coeff[i]) * x;
         }
-        pol_evaluated += coeff[0];
-        return pol_evaluated;
+        polEvaluated += coeff[0];
+        return polEvaluated;
     }
 
     public static double power(double x, int n) {
