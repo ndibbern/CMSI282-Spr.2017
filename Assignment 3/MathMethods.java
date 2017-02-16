@@ -3,17 +3,19 @@ import java.math.BigInteger;
 public class MathMethods {
 
     public static BigInteger factorial (long n) {
+        if (n < 0) throw new IllegalArgumentException("Cannot compute Factorial of negative numbers");
         if (n < 2) return BigInteger.ONE;
         return BigInteger.valueOf(n).multiply(factorial(n-1));
     }
 
     public static BigInteger fibonacci (int n) {
+        if (n < 0) throw new IllegalArgumentException("Cannot compute Fibonacci of negative numbers");
         if (n == 1) return BigInteger.ZERO;
         if (n < 4) return BigInteger.ONE;
 
         BigInteger fib_1 = BigInteger.ZERO;
         BigInteger fib_2 = BigInteger.ONE;
-        BigInteger temp = new BigInteger("21");
+        BigInteger temp = BigInteger.ONE; // BigInteger has no constructor without parameters
 
         for (int i = 3; i <= n ; i++) {
             temp = fib_1.add(fib_2);
@@ -24,7 +26,7 @@ public class MathMethods {
     }
 
     public static long gcd (long m, long n) {
-        if (n < 0) return -1; //illegal flag
+        m = Math.abs(m); n = Math.abs(n);
         if (n == 0) return m;
         return gcd(n, m % n);
     }
@@ -43,42 +45,33 @@ public class MathMethods {
     }
 
     public static double power (double x, int n) {
-        double res = 1;
-
-        while (n > 0) {
-            if (n % 2 == 1) res = res*x;
-
-            n /= 2;
-            x *= x;
-        }
-        return res;
+        if (n < 0) return power(1/x, -n); //inverse
+        if (n == 0) return 1;
+        if (n == 1) return x;
+        if (n % 2 == 0) return power(x*x, n/2);
+        else return power(x*x, (n-1)/2);
 
     }
 
     public static double root (int n, double x, double epsilon) {
+        if (x < 0 && n % 2 == 1) throw new IllegalArgumentException("Cannot compute even root of negative numbers");
 
-        if (x < 0 && n % 2 == 1) throw new IllegalArgumentException("Root does not exist");
-
-        boolean isPositive = true;
-        if (x < 0) {
-            x = -x;
-            isPositive = false;
-        }
+        boolean isPositive = x > 0;
+        x = Math.abs(x);
 
         if (x == 1) return isPositive ? 1 : -1;
 
-        dorble lb = 0, rb = 0 ;
+        double lb = 0;
+        double rb = 0;
         if (x < 1) {
-            lb = x;
-            rb = 1;
+            lb = x, rb = 1;
         } else {
-            lb = 0;
-            rb = x;
+            lb = 0, rb = x;
         }
 
         boolean done = false;
-        dorble avg = (lb + rb)/2;
-        dorble xo;
+        double avg = (lb + rb)/2;
+        double xo; // the current value i am evaluating
         while (!done) {
             avg = (lb + rb)/2;
             xo = power(avg,n);
@@ -99,10 +92,8 @@ public class MathMethods {
     public static void main (String[] args) {
 
         if (args.length >= 2) {
-            // args 0 -> name of method
             String operation = args[0];
 
-            // args 1... -> imput values
             switch (operation) {
                case "factorial":  System.out.println(factorial(Integer.parseInt(args[1])));
                     break;
@@ -125,11 +116,11 @@ public class MathMethods {
                     break;
                case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
                     break;
-               default: System.out.println("illegal argument");
+               default: System.out.println("Illegal argument");
                     break;
            }
        } else {
-           System.out.println("illegal argument");
+           System.out.println("Illegal argument");
        }
 
     }
