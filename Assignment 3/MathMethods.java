@@ -64,9 +64,9 @@ public class MathMethods {
         double lb = 0;
         double rb = 0;
         if (x < 1) {
-            lb = x, rb = 1;
+            lb = x; rb = 1;
         } else {
-            lb = 0, rb = x;
+            lb = 0; rb = x;
         }
 
         boolean done = false;
@@ -87,6 +87,12 @@ public class MathMethods {
 
     public static double sqrt (double x, double epsilon) {
         return root(2, x, epsilon);
+    }
+
+    public static String instructions () {
+        String instruction =  " # This is how you should use this program : \n";
+        instruction += "java MathMethods [function] [parameters]...";
+        return instruction;
     }
 
     public static void main (String[] args) {
@@ -116,11 +122,11 @@ public class MathMethods {
                     break;
                case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
                     break;
-               default: System.out.println("Illegal argument");
+               default: System.out.println(instructions());
                     break;
            }
        } else {
-           System.out.println("Illegal argument");
+           System.out.println(instructions());
        }
 
     }
