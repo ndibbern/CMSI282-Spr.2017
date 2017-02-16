@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.lang.Math;
 
 public class MathMethods {
 
@@ -30,22 +31,49 @@ public class MathMethods {
     }
 
     public static double power(double x, int n) {
-        return x;
+        return x*x;
     }
 
     public static double root(int n, double x, double epsilon) {
-        if(x == 1) {return 1;}
-        if(x ==)
-        if(x < 1 &&)
-        while(error > epsilon) {
-            rootValue = (lb + ub)/2;
-            fp = power(rootValue,n);
-            error = math.abs(fp - x);
-            if(fb > n) {ub = rootValue;}
-            else {lb = rootValue;}
+        //if (x == -1 && n % 2 != 0) {return -1;}
+
+        if (x < 0 && n % 2 != 0) {
+            throw new IllegalArgumentException("Root is complex");
         }
 
-        return rootValue;
+        boolean isPositive = true;
+        if (x < 0) {
+            x = -x;
+            isPositive = false;
+        }
+
+        if (x == 1) {
+            return isPositive ? 1 : -1;
+        }
+
+        double lb = 0, ub = 0 ;
+        if (x < 1) {
+            lb = x;
+            ub = 1;
+        } else {
+            lb = 0;
+            ub = x;
+        }
+
+        boolean done = false;
+        double avg = (lb + ub)/2;
+        double xo;
+        while (!done) {
+            avg = (lb + ub)/2;
+            xo = power(avg,n);
+            done = Math.abs(xo - x) < epsilon;
+            if (!done) {
+                if (xo > x) ub = avg;
+                else lb = avg;
+            }
+        }
+
+        return isPositive ? avg : -avg;
     }
 
     public static double sqrt(double x, double epsilon) {
@@ -56,6 +84,7 @@ public class MathMethods {
         System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
         System.out.println(factorial(5));
         System.out.println(gcd(12, 8));
+        System.out.println(root(2,9,0.000001));
 
     }
 }
