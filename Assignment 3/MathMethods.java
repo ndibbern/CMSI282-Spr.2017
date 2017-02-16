@@ -74,7 +74,7 @@ public class MathMethods {
         double xo; // the current value i am evaluating
         while (!done) {
             avg = (lb + rb)/2;
-            xo = power(avg,n);
+            xo = power(avg, n);
             done = Math.abs(xo - x) < epsilon;
             if (!done) {
                 if (xo > x) rb = avg;
@@ -90,8 +90,13 @@ public class MathMethods {
     }
 
     public static String instructions () {
+        String[] functions = {"factorial","fibonacci","gcd","lcm","poly","power","root", "sqrt"};
         String instruction =  " # This is how you should use this program : \n";
-        instruction += "java MathMethods [function] [parameters]...";
+        instruction += " > java MathMethods [function] [parameters]...\n\n";
+        instruction += " ## Allowed instructions are: \n";
+        for (String i : functions) {
+            instruction += " - " + i + "\n";
+        }
         return instruction;
     }
 
