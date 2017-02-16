@@ -15,14 +15,14 @@ public class MathMethods {
         if (n < 0) {
             throw new IllegalArgumentException("Fibonacci of negative numbers can not be computed");
         }
-        if (n == 1) return BigInteger.ZERO;
-        if (n <= 3) return BigInteger.ONE;
+        if (n == 0) return BigInteger.ZERO;
+        if (n == 1) return BigInteger.ONE;
 
         BigInteger n1 = BigInteger.ZERO;
         BigInteger n2 = BigInteger.ONE;
         BigInteger temp = new BigInteger("21"); // Place holder
 
-        for (int i = 3; i <= n ; i++) {
+        for (int i = 2; i <= n ; i++) {
             temp = n1.add(n2);
             n1 = n2;
             n2 = temp;
@@ -103,7 +103,6 @@ public class MathMethods {
                 else lb = avg;
             }
         }
-
         return isPositive ? avg : -avg;
     }
 
