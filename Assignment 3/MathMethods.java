@@ -15,7 +15,7 @@ public class MathMethods {
     }
 
     public static long lcm(long m, long n) {
-        return -5;
+        return (m * n)/gcd(m, n);
     }
 
     public static double poly(double x, double[] coeff) {
