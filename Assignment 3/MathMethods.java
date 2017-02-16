@@ -4,23 +4,17 @@ import java.util.Arrays;
 public class MathMethods {
 
 
-    // public static BigInteger factorial(long n) {
-    //     BigInteger nfac = BigInteger.valueOf(n);
-    //     BigInteger nf = BigInteger.valueOf(n);
-    //     BigInteger i = new BigInteger();
-    //     for(i = nf - 1; i > 1; i-- ) {
-    //         nfac = nfac.multiply(i);
-    //         }
-    //         return nfac;
-    // }
+    public static BigInteger factorial(long n) {
+        if (n <= 1) return BigInteger.ONE;
+        BigInteger answer = BigInteger.valueOf(n).multiply(factorial(n-1));
+        return answer;
+    }
 
     public static long gcd(long m, long n) {
-
         return -5;
     }
 
     public static long lcm(long m, long n) {
-
         return -5;
     }
 
@@ -47,6 +41,7 @@ public class MathMethods {
 
     public static void main(String[] args) {
         System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
+        System.out.println(factorial(5));
 
     }
 }
