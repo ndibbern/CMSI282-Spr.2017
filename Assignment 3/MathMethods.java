@@ -1,10 +1,6 @@
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.lang.Math;
 
 public class MathMethods {
-
-    ///public static String[] operations = {"factorial", "fibonacci", "gcd", "lcm", "poly", "power", "root", "sqrt"};
 
     public static BigInteger factorial(long n) {
         if (n <= 1) return BigInteger.ONE;
@@ -134,11 +130,11 @@ public class MathMethods {
                     break;
                case "sqrt":  System.out.println(sqrt(Double.parseDouble(args[1]), Double.parseDouble(args[2])));
                     break;
-               default: System.out.println("illigal argument");
+               default: System.out.println("illegal argument");
                     break;
            }
        } else {
-           System.out.println("illigal argument");
+           System.out.println("illegal argument");
        }
 
     }
