@@ -32,7 +32,18 @@ public class MathMethods {
     }
 
     public static double root(int n, double x, double epsilon) {
-        return 0.5;
+        if(x == 1) {return 1;}
+        if(x ==)
+        if(x < 1 &&)
+        while(error > epsilon) {
+            rootValue = (lb + ub)/2;
+            fp = power(rootValue,n);
+            error = math.abs(fp - x);
+            if(fb > n) {ub = rootValue;}
+            else {lb = rootValue;}
+        }
+
+        return rootValue;
     }
 
     public static double sqrt(double x, double epsilon) {
