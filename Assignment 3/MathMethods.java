@@ -10,14 +10,14 @@ public class MathMethods {
 
     public static BigInteger fibonacci (int n) {
         if (n < 0) throw new IllegalArgumentException("Cannot compute Fibonacci of negative numbers");
-        if (n == 1) return BigInteger.ZERO;
-        if (n < 4) return BigInteger.ONE;
+        if (n == 0) return BigInteger.ZERO;
+        if (n == 1) return BigInteger.ONE;
 
         BigInteger fib_1 = BigInteger.ZERO;
         BigInteger fib_2 = BigInteger.ONE;
         BigInteger temp = BigInteger.ONE; // BigInteger has no constructor without parameters
 
-        for (int i = 3; i <= n ; i++) {
+        for (int i = 2; i <= n ; i++) {
             temp = fib_1.add(fib_2);
             fib_1 = fib_2;
             fib_2 = temp;
