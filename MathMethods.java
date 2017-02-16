@@ -40,8 +40,6 @@ public class MathMethods {
     }
 
     public static double root(int n, double x, double epsilon) {
-
-
         return 0.5;
     }
 
