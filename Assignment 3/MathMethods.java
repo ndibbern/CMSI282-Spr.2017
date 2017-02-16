@@ -47,11 +47,19 @@ public class MathMethods {
     }
 
     public static double power(double x, int n) {
-        return x*x;
+        double res = 1;
+
+        while (n > 0) {
+            if (n % 2 == 1) res = res*x;
+
+            n /= 2;
+            x *= x;
+        }
+        return res;
+
     }
 
     public static double root(int n, double x, double epsilon) {
-        //if (x == -1 && n % 2 != 0) {return -1;}
 
         if (x < 0 && n % 2 != 0) {
             throw new IllegalArgumentException("Root is complex");
@@ -97,11 +105,12 @@ public class MathMethods {
     }
 
     public static void main(String[] args) {
-        System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
-        System.out.println(factorial(5));
-        System.out.println(gcd(12, 8));
-        System.out.println(root(2,9,0.000001));
-        System.out.println(fibonacci(7));
+        // System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
+        // System.out.println(factorial(5));
+        // System.out.println(gcd(12, 8));
+        System.out.println(root(3,125,0.000001));
+        // System.out.println(fibonacci(7));
+        System.out.println(power(3,9));
 
     }
 }
