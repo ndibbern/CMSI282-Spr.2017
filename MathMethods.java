@@ -1,15 +1,20 @@
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class MathMethods {
 
     public MathMethods() {
     }
 
-    public static BigInteger factorial(int n) {
-        BigInteger nfac = n;
-        for(int i = n - 1; i > 1; )
-        return 1;
-    }
+    // public static BigInteger factorial(long n) {
+    //     BigInteger nfac = BigInteger.valueOf(n);
+    //     BigInteger nf = BigInteger.valueOf(n);
+    //     BigInteger i = new BigInteger();
+    //     for(i = nf - 1; i > 1; i-- ) {
+    //         nfac = nfac.multiply(i);
+    //         }
+    //         return nfac;
+    // }
 
     public static long gcd(long m, long n) {
 
@@ -22,22 +27,30 @@ public class MathMethods {
     }
 
     public static double poly(double x, double[] coeff) {
-
-        return -0.5;
+        double pol_evaluated = 0;
+        for(int i = coeff.length - 1; i > 0; i --) {
+            pol_evaluated = (pol_evaluated + coeff[i]) * x;
+        }
+        pol_evaluated += coeff[0];
+        return pol_evaluated;
     }
 
     public static double power(double x, int n) {
-
-        return 0.5;
+        return x;
     }
 
     public static double root(int n, double x, double epsilon) {
+
 
         return 0.5;
     }
 
     public static double sqrt(double x, double epsilon) {
+        return root(2, x, epsilon);
+    }
 
-        return 0.5;
+    public static void main(String[] args) {
+        System.out.println(poly(2,new double[]{4,-8,6,-9,4}));
+
     }
 }
