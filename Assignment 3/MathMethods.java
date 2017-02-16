@@ -3,8 +3,6 @@ import java.util.Arrays;
 
 public class MathMethods {
 
-    public MathMethods() {
-    }
 
     // public static BigInteger factorial(long n) {
     //     BigInteger nfac = BigInteger.valueOf(n);
