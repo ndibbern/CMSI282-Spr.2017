@@ -93,7 +93,7 @@ public class MathMethods {
         String[] functions = {"factorial","fibonacci","gcd","lcm","poly","power","root", "sqrt"};
         String instruction =  " # This is how you should use this program : \n";
         instruction += " > java MathMethods [function] [parameters]...\n\n";
-        instruction += " ## Allowed instructions are: \n";
+        instruction += " ## Allowed functins are: \n";
         for (String i : functions) {
             instruction += " - " + i + "\n";
         }
