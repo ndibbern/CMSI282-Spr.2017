@@ -15,4 +15,13 @@ public class Item {
     public int getWeight () {
         return this.weight;
     }
+
+    public String toString () {
+        String toPrint = "# Item: \n";
+        toPrint += " - Cost: ";
+        toPrint += this.cost;
+        toPrint += "\n - Weight: ";
+        toPrint += this.weight;
+        return toPrint;
+    }
 }
