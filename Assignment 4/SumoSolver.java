@@ -6,7 +6,7 @@ public class SumoSolver {
     public static Hashtable<Entry, Bag> memoization = new Hashtable<>();
     public static Bag getBestBag(int totalMoney, ArrayList<Item> items) {
 
-            Bag bestBag = new Bag(); // start with the empy Bag
+            Bag bestBag = new Bag(); // start with the empty Bag
             int moneyAvailable = totalMoney;
             int numProducts = items.size();
 
