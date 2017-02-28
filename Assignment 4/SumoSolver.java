@@ -21,15 +21,13 @@ public class SumoSolver {
 
                     if (bestBag.itemIsinBag(items.get(numProducts - 1))) {
                         // Only allowed to grab one item of each of the items available.
-                        bestBag = new Bag(); //FIX
+                        bestBag = new Bag();
                     } else {
                         bestBag.add(items.get(numProducts - 1));
                     }
-                    // bestBag.add(items.get(numProducts - 1));
                 }
                 // check if this solution is better than the one above it
                 Item lastItem = items.remove(numProducts - 1);
-                //System.out.println(lastItem);
                 Bag bagFromAbove = new Bag(getBestBag(moneyAvailable, items));
                 items.add(lastItem);
                 bestBag = Bag.getBest(bagFromAbove, bestBag);
