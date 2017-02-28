@@ -28,7 +28,13 @@ public class SumoSolver {
             } else {
                 if (moneyAvailable >= currentItem.cost) {
                     heaviestBag = new Bag(getHeaviestBag(moneyAvailable - currentItem.cost, items));
-                    heaviestBag.add(currentItem);
+
+                    if (heaviestBag.itemIsinBag(currentItem)) {
+                    // Only allowed to grab one item of each of the items available.
+                    heaviestBag = new Bag(getHeaviestBag(moneyAvailable - 1, items));
+                    } else {
+                        heaviestBag.add(currentItem);
+                    }
                 }
                 // check if this solution is better than the one above it
                 Item lastItem = items.get(numProducts - 1);

@@ -36,7 +36,7 @@ public class Bag {
         return this.items;
     }
 
-    public boolean contains (Item item) {
+    public boolean itemIsinBag (Item item) {
        for (Item i : this.items) {
            if (i.getLabel() == item.getLabel()) {
                return true;
