@@ -101,4 +101,79 @@ public class SumoSolver {
              System.out.println(myBag.getItemsCount() + " items/$" + myBag.price + "/"+ myBag.weight + " pounds\n");
          }
     }
+
+    private static class Bag {
+
+        private ArrayList<Item> items;
+        public int price, weight;
+
+        public Bag () {
+            this.items = new ArrayList<Item>();
+            this.price = 0;
+            this.weight = 0;
+        }
+
+        public Bag (Bag toClone) {
+            this.items = new ArrayList<>(toClone.getItems());
+            this.price = toClone.price;
+            this.weight = toClone.weight;
+        }
+
+        public void add (Item item) {
+            if (this.itemIsinBag(item)) return;
+            items.add(item);
+            weight += item.weight;
+            price += item.price;
+        }
+
+        public int getItemsCount () {
+            return this.items.size();
+        }
+
+        public static Bag getBest (Bag c1, Bag c2) {
+            return c1.weight > c2.weight ? c1 : c2;
+        }
+
+
+        public ArrayList<Item> getItems () {
+            return this.items;
+        }
+
+        public boolean itemIsinBag (Item item) {
+           for (Item i : this.items) {
+               if (i.getLabel() == item.getLabel()) {
+                   return true;
+               }
+           }
+           return false;
+       }
+    }
+
+    private static class Item {
+
+        private static final String DEFAULT_LABEL = "unlabled item";
+        public int price, weight;
+        public String label;
+
+        public Item (int price, int weight) {
+            this.price = price;
+            this.weight = weight;
+            this.label = DEFAULT_LABEL;
+        }
+
+        public String changeLabel (String newLabel) {
+            this.label = newLabel;
+            return label;
+        }
+
+        public String getLabel () {
+           return this.label;
+        }
+
+        public String toString () {
+            return "$" + this.price + "/" + this.weight + " pounds";
+        }
+    }
+
+
 }
