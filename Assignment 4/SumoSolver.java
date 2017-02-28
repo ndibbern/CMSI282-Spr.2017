@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class SumoSolver {
 
-    public static Hashtable<Entry, Bag> memoization = new Hashtable<>();
+    public static Bag[][] bagGrid;
+
     public static Bag getBestBag(int totalMoney, ArrayList<Item> items) {
 
             Bag bestBag = new Bag(); // start with the empty Bag
@@ -20,20 +20,21 @@ public class SumoSolver {
                 return bestBag;
              }
 
-            Entry thisBag = new Entry(numProducts, moneyAvailable);
 
-            if (memoization.get(thisBag) != null) {
-                 return memoization.get(thisBag); //already computed this value
+            if (bagGrid[numProducts][moneyAvailable] != null) {
+                System.out.println("hola");
+                 return bagGrid[numProducts][moneyAvailable]; //already computed this value
             } else {
                 if (moneyAvailable >= items.get(numProducts - 1).price) {
                     bestBag = new Bag(getBestBag(moneyAvailable - items.get(numProducts - 1).price, items));
 
                     if (bestBag.itemIsinBag(items.get(numProducts - 1))) {
                     // Only allowed to grab one item of each of the items available.
-                    bestBag = new Bag(getBestBag(moneyAvailable - 1, items));
+                    bestBag = new Bag(); //FIX
                     } else {
                         bestBag.add(items.get(numProducts - 1));
                     }
+                    bestBag.add(items.get(numProducts - 1));
                 }
                 // check if this solution is better than the one above it
                 Item lastItem = items.get(numProducts - 1);
@@ -41,7 +42,9 @@ public class SumoSolver {
                 Bag bagFromAbove = new Bag(getBestBag(moneyAvailable, items));
                 items.add(lastItem);
                 bestBag = Bag.getBest(bagFromAbove, bestBag);
+
             }
+            bagGrid[numProducts][moneyAvailable] = bestBag;
             return bestBag;
     }
 
@@ -89,6 +92,7 @@ public class SumoSolver {
              shouldRun = false;
          }
          if (shouldRun) {
+             bagGrid = new Bag[items.size() + 1][totalMoney + 1];
              Bag myBag = getBestBag(totalMoney, items);
              System.out.println(" ");
              for (Item i : myBag.getItems()) {
