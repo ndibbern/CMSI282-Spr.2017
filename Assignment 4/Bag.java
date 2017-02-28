@@ -18,6 +18,7 @@ public class Bag {
     }
 
     public void add (Item item) {
+        if (this.itemIsinBag(item)) return;
         items.add(item);
         weight += item.weight;
         price += item.price;

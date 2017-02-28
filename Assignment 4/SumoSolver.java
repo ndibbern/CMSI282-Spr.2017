@@ -10,38 +10,33 @@ public class SumoSolver {
             int moneyAvailable = totalMoney;
             int numProducts = items.size();
 
-            //Define unique label to all items
-            for (int i = 0; i < numProducts; i++) {
-                items.get(i).changeLabel( Integer.toString(i));
-            }
-
-            //Check if you have 0 money or 0 items, then the bag is empty
-            if (moneyAvailable == 0 || numProducts == 0) {
-                return bestBag;
-             }
-
-
             if (bagGrid[numProducts][moneyAvailable] != null) {
-                System.out.println("hola");
                  return bagGrid[numProducts][moneyAvailable]; //already computed this value
             } else {
+                if (moneyAvailable == 0 || numProducts == 0)
+                    return bestBag;
+
                 if (moneyAvailable >= items.get(numProducts - 1).price) {
                     bestBag = new Bag(getBestBag(moneyAvailable - items.get(numProducts - 1).price, items));
 
                     if (bestBag.itemIsinBag(items.get(numProducts - 1))) {
-                    // Only allowed to grab one item of each of the items available.
-                    bestBag = new Bag(); //FIX
+                        // Only allowed to grab one item of each of the items available.
+                        bestBag = new Bag(); //FIX
                     } else {
                         bestBag.add(items.get(numProducts - 1));
                     }
-                    bestBag.add(items.get(numProducts - 1));
+                    // bestBag.add(items.get(numProducts - 1));
                 }
                 // check if this solution is better than the one above it
-                Item lastItem = items.get(numProducts - 1);
-                items.remove(numProducts - 1);
+                Item lastItem = items.remove(numProducts - 1);
+                //System.out.println(lastItem);
                 Bag bagFromAbove = new Bag(getBestBag(moneyAvailable, items));
                 items.add(lastItem);
                 bestBag = Bag.getBest(bagFromAbove, bestBag);
+
+                if (moneyAvailable - bestBag.price >= items.get(numProducts - 1).price && !bestBag.itemIsinBag(items.get(numProducts - 1))) {
+                    bestBag.add(items.get(numProducts - 1));
+                }
 
             }
             bagGrid[numProducts][moneyAvailable] = bestBag;
@@ -92,7 +87,12 @@ public class SumoSolver {
              shouldRun = false;
          }
          if (shouldRun) {
+
              bagGrid = new Bag[items.size() + 1][totalMoney + 1];
+
+             for (int i = 0; i < items.size(); i++) {
+                 items.get(i).changeLabel( Integer.toString(i));
+             }
              Bag myBag = getBestBag(totalMoney, items);
              System.out.println(" ");
              for (Item i : myBag.getItems()) {
