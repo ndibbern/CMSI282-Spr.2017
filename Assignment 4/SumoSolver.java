@@ -38,11 +38,15 @@ public class SumoSolver {
 
     public static void main (String[] args) {
 
-        boolean badData = false;
+        boolean negativeValues = false;
+        boolean NaN = false;
+        boolean notOdd = false;
+        boolean shouldRun = true;
+
+        int totalMoney = 0;
+        ArrayList<Item> items = new ArrayList<Item>(args.length / 2);
 
         if (args.length % 2 != 0) {
-            ArrayList<Item> items = new ArrayList<Item>(args.length / 2);
-            int totalMoney = 0;
 
             try {
                 totalMoney = Integer.parseInt(args[args.length - 1]);
@@ -53,24 +57,35 @@ public class SumoSolver {
 
                     items.add(new Item(thisWeight, thisCost));
                     if (thisWeight < 0 || thisCost < 0) {
-                        badData = true;
+                        negativeValues = true;
                     }
                 }
-            }catch (NumberFormatException ignore) {
-                System.out.println("Supplied values must be integers");
+            } catch (NumberFormatException ignore) {
+                NaN = true;
             }
+        } else {
+            notOdd = true;
+        }
 
-            if(badData){
-                System.out.println("Supplied values must be positive integers");
-            } else {
-                Bag myBag = getHeaviestBag(totalMoney, items);
-                System.out.println(" ");
-                for (Item i : myBag.getItems()) {
-                    System.out.println(i);
-                }
-                System.out.println(myBag.getItemsCount() + " items/$" + myBag.cost + "/"+ myBag.weight + " pounds\n");
-            }
-
-        } else System.out.println("One or more of the supplied values is not valid");
+         if (NaN) {
+             System.out.println("One or more of the supplied values is not valid");
+             shouldRun = false;
+         }
+         if (notOdd){
+             System.out.println("Please provide an odd number of arguments");
+             shouldRun = false;
+         }
+         if (negativeValues){
+             System.out.println("Supplied values must be positive integers");
+             shouldRun = false;
+         }
+         if (shouldRun) {
+             Bag myBag = getHeaviestBag(totalMoney, items);
+             System.out.println(" ");
+             for (Item i : myBag.getItems()) {
+                 System.out.println(i);
+             }
+             System.out.println(myBag.getItemsCount() + " items/$" + myBag.cost + "/"+ myBag.weight + " pounds\n");
+         }
     }
 }
