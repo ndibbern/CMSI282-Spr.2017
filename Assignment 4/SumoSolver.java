@@ -3,7 +3,7 @@ import java.util.Hashtable;
 
 public class SumoSolver {
 
-    public static Hashtable<Entry, Bag> memo = new Hashtable<>();
+    public static Hashtable<Entry, Bag> memoization = new Hashtable<>();
     public static Bag getBestBag(int totalMoney, ArrayList<Item> items) {
 
             Bag bestBag = new Bag(); // start with the empy Bag
@@ -22,8 +22,8 @@ public class SumoSolver {
 
             Entry thisBag = new Entry(numProducts, moneyAvailable);
 
-            if (memo.get(thisBag) != null) {
-                 return memo.get(thisBag); //already computed this value
+            if (memoization.get(thisBag) != null) {
+                 return memoization.get(thisBag); //already computed this value
             } else {
                 if (moneyAvailable >= items.get(numProducts - 1).price) {
                     bestBag = new Bag(getBestBag(moneyAvailable - items.get(numProducts - 1).price, items));
@@ -41,7 +41,6 @@ public class SumoSolver {
                 Bag bagFromAbove = new Bag(getBestBag(moneyAvailable, items));
                 items.add(lastItem);
                 bestBag = Bag.getBest(bagFromAbove, bestBag);
-                memo.put(thisBag, bestBag);
             }
             return bestBag;
     }
