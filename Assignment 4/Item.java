@@ -1,11 +1,11 @@
 public class Item {
 
     private static final String DEFAULT_LABEL = "unlabled item";
-    public int cost, weight;
+    public int price, weight;
     public String label;
 
-    public Item (int cost, int weight) {
-        this.cost = cost;
+    public Item (int price, int weight) {
+        this.price = price;
         this.weight = weight;
         this.label = DEFAULT_LABEL;
     }
@@ -20,7 +20,6 @@ public class Item {
     }
 
     public String toString () {
-        String toPrint = "$" + this.cost + "/" + this.weight + " pounds";
-        return toPrint;
+        return "$" + this.price + "/" + this.weight + " pounds";
     }
 }

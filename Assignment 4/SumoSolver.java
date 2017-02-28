@@ -4,47 +4,46 @@ import java.util.Hashtable;
 public class SumoSolver {
 
     public static Hashtable<Entry, Bag> memo = new Hashtable<>();
-    public static Bag getHeaviestBag(int totalMoney, ArrayList<Item> items) {
+    public static Bag getBestBag(int totalMoney, ArrayList<Item> items) {
 
-            Bag heaviestBag = new Bag(); // start with the empy Bag
+            Bag bestBag = new Bag(); // start with the empy Bag
             int moneyAvailable = totalMoney;
             int numProducts = items.size();
 
-            //Define unique name to all items
+            //Define unique label to all items
             for (int i = 0; i < numProducts; i++) {
                 items.get(i).changeLabel( Integer.toString(i));
             }
 
             //Check if you have 0 money or 0 items, then the bag is empty
             if (moneyAvailable == 0 || numProducts == 0) {
-                return heaviestBag;
+                return bestBag;
              }
 
             Entry thisBag = new Entry(numProducts, moneyAvailable);
-            Item currentItem = items.get(numProducts - 1);
 
             if (memo.get(thisBag) != null) {
                  return memo.get(thisBag); //already computed this value
             } else {
-                if (moneyAvailable >= currentItem.cost) {
-                    heaviestBag = new Bag(getHeaviestBag(moneyAvailable - currentItem.cost, items));
+                if (moneyAvailable >= items.get(numProducts - 1).price) {
+                    bestBag = new Bag(getBestBag(moneyAvailable - items.get(numProducts - 1).price, items));
 
-                    if (heaviestBag.itemIsinBag(currentItem)) {
+                    if (bestBag.itemIsinBag(items.get(numProducts - 1))) {
                     // Only allowed to grab one item of each of the items available.
-                    heaviestBag = new Bag(getHeaviestBag(moneyAvailable - 1, items));
+                    bestBag = new Bag(getBestBag(moneyAvailable - 1, items));
                     } else {
-                        heaviestBag.add(currentItem);
+                        bestBag.add(items.get(numProducts - 1));
                     }
                 }
                 // check if this solution is better than the one above it
                 Item lastItem = items.get(numProducts - 1);
                 items.remove(numProducts - 1);
-                Bag bagFromAbove = new Bag(getHeaviestBag(moneyAvailable, items));
+                Bag bagFromAbove = new Bag(getBestBag(moneyAvailable, items));
                 items.add(lastItem);
-                heaviestBag = Bag.getHeaviest(bagFromAbove, heaviestBag);
-                memo.put(thisBag, heaviestBag);
+                bestBag = Bag.getBest(bagFromAbove, bestBag);
+                memo.put(thisBag, bestBag);
             }
-            return heaviestBag;
+            return bestBag;
     }
 
     public static void main (String[] args) {
@@ -64,10 +63,10 @@ public class SumoSolver {
                 for (int i = 0; i < (args.length-1)/2; i++) {
 
                     int thisWeight = Integer.parseInt(args[2 * i]);
-                    int thisCost = Integer.parseInt(args[2 * i + 1]);
+                    int thisprice = Integer.parseInt(args[2 * i + 1]);
 
-                    items.add(new Item(thisWeight, thisCost));
-                    if (thisWeight < 0 || thisCost < 0) {
+                    items.add(new Item(thisWeight, thisprice));
+                    if (thisWeight < 0 || thisprice < 0) {
                         negativeValues = true;
                     }
                 }
@@ -91,12 +90,12 @@ public class SumoSolver {
              shouldRun = false;
          }
          if (shouldRun) {
-             Bag myBag = getHeaviestBag(totalMoney, items);
+             Bag myBag = getBestBag(totalMoney, items);
              System.out.println(" ");
              for (Item i : myBag.getItems()) {
                  System.out.println(i);
              }
-             System.out.println(myBag.getItemsCount() + " items/$" + myBag.cost + "/"+ myBag.weight + " pounds\n");
+             System.out.println(myBag.getItemsCount() + " items/$" + myBag.price + "/"+ myBag.weight + " pounds\n");
          }
     }
 }
