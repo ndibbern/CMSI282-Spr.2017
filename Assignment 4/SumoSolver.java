@@ -10,7 +10,12 @@ public class SumoSolver {
             int moneyAvailable = totalMoney;
             int numProducts = items.size();
 
-            //First check if you have 0 money or 0 items, then the bag is empty
+            //Define unique name to all items
+            for (int i = 0; i < numProducts; i++) {
+                items.get(i).changeLabel( Integer.toString(i));
+            }
+
+            //Check if you have 0 money or 0 items, then the bag is empty
             if (moneyAvailable == 0 || numProducts == 0) {
                 return heaviestBag;
              }
@@ -25,7 +30,7 @@ public class SumoSolver {
                     heaviestBag = new Bag(getHeaviestBag(moneyAvailable - currentItem.cost, items));
                     heaviestBag.add(currentItem);
                 }
-                // check id this solution is better than the one above it
+                // check if this solution is better than the one above it
                 Item lastItem = items.get(numProducts - 1);
                 items.remove(numProducts - 1);
                 Bag bagFromAbove = new Bag(getHeaviestBag(moneyAvailable, items));
