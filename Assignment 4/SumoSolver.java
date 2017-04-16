@@ -88,6 +88,7 @@ public class SumoSolver {
 
              bagGrid = new Bag[items.size() + 1][totalMoney + 1];
 
+             // Make sure each item has a unique label
              for (int i = 0; i < items.size(); i++) {
                  items.get(i).changeLabel( Integer.toString(i));
              }
