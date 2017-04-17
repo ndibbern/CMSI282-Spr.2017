@@ -1,17 +1,57 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.io.*;
 
 public class BucketSort {
 
-    /**
-     * Make BucketSort.java, a program that takes an arbitrary file of doubles
-     * (i.e., both the amount of data and their range are arbitrary) from standard input,
-     * then outputs them in ascending order, using the algorithm discussed in class.
-     * Your program should read the data into a java.util.ArrayList;
-     * use small ArrayLists (rather than linked lists) for the buckets;
-     * and merge the buckets back into the original ArrayList before outputting the results. n
-     * A typical invocation of your program might look like this: java BucketSort < FileFullOfDoubles
-     */
+     private static class FileReader {
+
+         private java.io.BufferedReader stdIn;
+
+         public FileReader () {
+             stdIn = new java.io.BufferedReader (new java.io.InputStreamReader(System.in));
+         }
+         /**
+          * @return a double array holding the doubles found in stdIn, or an empty array if there is a problem
+          */
+         public double[] readNumbers () {
+             ArrayList<Double> numbers = new ArrayList<>();
+             String line = null;
+             try {
+                 while ((line  = stdIn.readLine()) != null) {
+                     double toAdd = readNumber(line);
+                     if (toAdd < Double.MAX_VALUE) numbers.add(toAdd);
+                     else return new double[] {};
+                 }
+             } catch (IOException e) {
+                 System.out.println("cannot read file ");
+             }
+             return convertDoubles(numbers);
+         }
+
+         /**
+          * @return the integer value of the string, or MAX_VALLUE in case the string is not a number
+          */
+         private double readNumber (String line) {
+             try {
+                 return Double.parseDouble(line);
+             } catch (NumberFormatException nfe) {
+                 return Double.MAX_VALUE;
+             }
+         }
+
+         private double[] convertDoubles(ArrayList<Double> doubles) {
+             doubles.trimToSize();
+             double[] ret = new double[doubles.size()];
+             Iterator<Double> iterator = doubles.iterator();
+             for (int i = 0; i < ret.length; i++)
+                 ret[i] = iterator.next().doubleValue();
+             return ret;
+         }
+
+     }
 
      public static ArrayList<Double> sort (double arr[], int n) {
           ArrayList<ArrayList<Double>> buckets = new ArrayList<ArrayList<Double>>(10);
@@ -74,4 +114,5 @@ public class BucketSort {
         }
 
 	}
+
 }
