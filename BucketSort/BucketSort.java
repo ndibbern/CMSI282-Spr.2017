@@ -101,6 +101,15 @@ public class BucketSort {
         }
     }
 
+    private static String listDoubles (ArrayList<Double> arr) {
+       StringBuilder ans = new StringBuilder();
+       for (Double d : arr) {
+           ans.append(d);
+           ans.append("\n");
+       }
+       return ans.toString();
+   }
+
     public static void main (String[] args) {
 
         FileReader fr = new FileReader();
@@ -108,7 +117,8 @@ public class BucketSort {
         boolean goodList = numbers.length > 0;
 
         if (goodList) {
-            System.out.println(Arrays.toString(sort(numbers, numbers.length).toArray()));
+            ArrayList<Double> sortedDoubles = sort(numbers, numbers.length);
+           System.out.println(listDoubles(sortedDoubles));
         } else {
             System.out.println("BAD DATA");
         }
