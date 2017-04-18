@@ -20,7 +20,7 @@ public class BucketSort {
             try {
                 while ((line  = stdIn.readLine()) != null) {
                     double toAdd = readNumber(line);
-                    if (toAdd < 1 && toAdd >= 0) numbers.add(toAdd);
+                    if (toAdd < Double.MAX_VALUE) numbers.add(toAdd);
                     else return new double[] {};
                 }
             } catch (IOException e) {
@@ -50,11 +50,38 @@ public class BucketSort {
         }
     }
 
-    public static ArrayList<Double> sort (double arr[], int n) {
+    private static double min (double[] arr) {
+        double min = arr[0];
+        for (double d : arr) {
+            if (d < min) min = d;
+        }
+        return Math.floor(min);
+    }
+
+    private static double max (double[] arr) {
+        double max = arr[0];
+        for (double d : arr) {
+            if (d > max) max = d;
+        }
+        return Math.ceil(max);
+    }
+
+    private static double range (double[] arr) {
+        return max(arr) - min(arr);
+    }
+
+    public static ArrayList<Double> sort (double[] arr, int n) {
         ArrayList<ArrayList<Double>> buckets = new ArrayList<ArrayList<Double>>();
 
+        double min = min(arr);
+        double range = range(arr);
+
+
         for (int i = 0; i < n; i++) buckets.add(new ArrayList<Double>());
-        for (int i = 0 ; i < n; i++) buckets.get((int) (arr[i] * n)).add(arr[i]);
+        for (int i = 0 ; i < n; i++) {
+            double normalized = (arr[i] - min) / range;
+            buckets.get((int) (normalized * n)).add(arr[i]);
+        }
 
         ArrayList<Double> ans = new ArrayList<>();
         int index = 0;
